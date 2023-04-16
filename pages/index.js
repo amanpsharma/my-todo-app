@@ -71,7 +71,7 @@ export default function Home() {
 	};
 	const onKeyUp = (event) => {
 		if (event?.key === "Enter" && todoInput?.length > 0) {
-			addToDo();
+			addTodo();
 		}
 	};
 	return !authUser ? (
@@ -89,7 +89,7 @@ export default function Home() {
 				<div className="bg-white -m-6 p-3 sticky top-0">
 					<div className="flex justify-center flex-col items-center">
 						<span className="text-7xl mb-10">📝</span>
-						<h1 className="text-5xl md:text-7xl font-bold">ToooDooo's</h1>
+						<h1 className="text-5xl md:text-7xl font-bold">Your's To Dooo's</h1>
 					</div>
 					<div className="flex items-center gap-2 mt-10">
 						<input
@@ -99,18 +99,19 @@ export default function Home() {
 							autoFocus
 							value={todoInput}
 							onChange={(e) => setTodoInput(e.target.value)}
-                            onKeyUp={(e) => onKeyUp(e)}
+							onKeyUp={(e) => onKeyUp(e)}
 						/>
 						<button
 							className="w-[60px] h-[60px] rounded-md bg-black flex justify-center items-center cursor-pointer transition-all duration-300 hover:bg-black/[0.8]"
 							onClick={addTodo}
+							disabled={todoInput.length > 1 ? false : true}
 						>
 							<AiOutlinePlus size={30} color="#fff" />
 						</button>
 					</div>
 				</div>
 				<div className="my-10">
-					{todos.length > 0 &&
+					{todos.length > 0 ? (
 						todos.map((todo, index) => (
 							<div key={todo.id} className="flex items-center justify-between mt-4">
 								<div className="flex items-center gap-3">
@@ -130,7 +131,28 @@ export default function Home() {
 									<MdDeleteForever size={24} className="text-red-400 hover:text-red-600 cursor-pointer" />
 								</div>
 							</div>
-						))}
+						))
+					) : (
+						<div className="w-full h-full flex flex-col justify-center items-center animate-pulse">
+							<svg
+								className="w-16 h-16 mb-4 opacity-50"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<circle cx="12" cy="12" r="10"></circle>
+								<path d="M15.54 8.46a3 3 0 0 1 0 4.24l-4.24 4.24a3 3 0 0 1-4.24 0 3 3 0 0 1 0-4.24l4.24-4.24a3 3 0 0 1 4.24 0z"></path>
+							</svg>
+							<div className="bg-gray-200 rounded-lg p-4">
+								<p className="text-gray-600 mb-2 opacity-50">You have no todos.</p>
+								<ul className="list-disc list-inside opacity-50"></ul>
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 		</main>
