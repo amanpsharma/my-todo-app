@@ -37,7 +37,6 @@ const LoginForm = () => {
 	const signInwithGoogle = async () => {
 		try {
 			const user = await signInWithPopup(auth, provider);
-			console.log(user);
 		} catch (error) {
 			console.error(error);
 		}
@@ -98,7 +97,7 @@ const LoginForm = () => {
 			<div
 				className="w-[40%] bg-slate-400 bg-cover bg-right-top hidden lg:block"
 				style={{
-					backgroundImage: "url('/login-banner.jpg')",
+					backgroundImage: "url('/notes-2208049_1920.jpg')",
 				}}
 			></div>
 		</main>
